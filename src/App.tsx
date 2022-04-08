@@ -1,7 +1,13 @@
+import CustomThemeProvider from './contexts/ThemeContext';
+import GlobalStyle from "./styles/global"
 
 
 function App() {
-  return <h1>Yugu Checkout</h1>
+  return (
+    <CustomThemeProvider>
+      <GlobalStyle />
+    </CustomThemeProvider>
+  )
 }
 
 export default App
