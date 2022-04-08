@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { Theme } from '../contexts/ThemeContext';
 
-const GlobalStyle = createGlobalStyle<{theme: Theme}>`
+const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     *{
         box-sizing: border-box;
         padding: 0;
@@ -22,15 +22,15 @@ const GlobalStyle = createGlobalStyle<{theme: Theme}>`
     button,
     input,
     textarea{
-        font-family: ${props => props.theme.bodyFont};
-        font-size: ${props => props.theme.normalFontSize};
+        font-family: ${(props) => props.theme.bodyFont};
+        font-size: ${(props) => props.theme.normalFontSize};
         -webkit-font-smoothing: antialiased;
         font-smooth: always;
     }
 
     body{
-        background-color: ${props => props.theme.colors.body};
-        color: ${props => props.theme.colors.gray300 };
+        background-color: ${(props) => props.theme.colors.body};
+        color: ${(props) => props.theme.colors.gray300};
         transition: .4s; 
     }
 
@@ -41,8 +41,8 @@ const GlobalStyle = createGlobalStyle<{theme: Theme}>`
     }
 
     h1,h2,h3{
-        color: ${props => props.theme.colors.gray900};
-        font-weight: ${props => props.theme.fontNormal};
+        color: ${(props) => props.theme.colors.gray900};
+        font-weight: ${(props) => props.theme.fontNormal};
     }
 
     ul{
@@ -56,6 +56,12 @@ const GlobalStyle = createGlobalStyle<{theme: Theme}>`
     img{
         max-width: 100%;
         height: auto;
+    }
+
+    .container {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1080px;
     }
 `;
 

@@ -1,13 +1,16 @@
 import CustomThemeProvider from './contexts/ThemeContext';
-import GlobalStyle from "./styles/global"
-
+import { Header } from './components/Header';
+import GlobalStyle from './styles/global';
 
 function App() {
   return (
     <CustomThemeProvider>
       <GlobalStyle />
+      <div className="container">
+        <Header />
+      </div>
     </CustomThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;
