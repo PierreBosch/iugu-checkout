@@ -35,12 +35,12 @@ export interface Theme extends DefaultTheme {
   fontNormal: string,
   fontMedium: string,
   fontLight: string,
-  space_05: string,   
-  space_075: string, 
-  space_1: string,    
-  space_15: string, 
-  space_2: string,     
-  space_25: string, 
+  space_8: string,    
+  space_12: string,  
+  space_16: string, 
+  space_24: string,
+  space_30: string,
+  space_40: string,
 }
 
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);

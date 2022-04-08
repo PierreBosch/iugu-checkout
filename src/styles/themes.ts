@@ -14,12 +14,12 @@ const defaultTheme = {
   fontNormal: '400',	
   fontMedium: '500',
   fontLight: '300',
-  space_05: '.5rem',   // 8px
-  space_075: '.75rem', // 12px
-  space_1: '1rem',     // 16px
-  space_15: '1.5rem',  // 24px
-  space_2: '2rem',     // 32px
-  space_25: '2.5rem',  // 40px
+  space_8: '.5rem',    // 8px
+  space_12: '.75rem',  // 12px
+  space_16: '1rem',    // 16px
+  space_24: '1.5rem',  // 24px
+  space_30: '1.875',   // 30px
+  space_40: '2.5rem',  // 40px
 }
 
 export const lightTheme = {
