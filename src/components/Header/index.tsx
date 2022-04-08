@@ -1,8 +1,10 @@
-import * as S from './styles';
-import WhiteBookSvg from '../../assets/images/white-book.svg?component';
 import { FiChevronLeft } from 'react-icons/fi';
 
-const Header = () => {
+import * as S from './styles';
+
+import WhiteBookSvg from '../../assets/images/white-book.svg?component';
+
+function Header() {
   return (
     <S.Container>
       <div className="header__navigation">
@@ -16,6 +18,6 @@ const Header = () => {
       </div>
     </S.Container>
   );
-};
+}
 
 export { Header };

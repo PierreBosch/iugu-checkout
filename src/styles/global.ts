@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { Theme } from '../contexts/ThemeContext';
 
-const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
+const GlobalStyle = createGlobalStyle`
     *{
         box-sizing: border-box;
         padding: 0;
@@ -23,6 +22,7 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     input,
     textarea{
         font-family: ${(props) => props.theme.bodyFont};
+        color: ${(props) => props.theme.colors.gray300};
         font-size: ${(props) => props.theme.normalFontSize};
         -webkit-font-smoothing: antialiased;
         font-smooth: always;

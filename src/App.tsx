@@ -1,6 +1,7 @@
 import CustomThemeProvider from './contexts/ThemeContext';
 import { Header } from './components/Header';
 import GlobalStyle from './styles/global';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <GlobalStyle />
       <div className="container">
         <Header />
+        <Checkout />
       </div>
     </CustomThemeProvider>
   );
