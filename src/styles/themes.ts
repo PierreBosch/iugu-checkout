@@ -27,7 +27,6 @@ export const lightTheme = {
   colors: {
       primary: '#191847',
       secondary: ' #F5850B',
-      secondaryLight: '#F5850B',
       gray100: '#F4F3F6',
       gray200: '#E1DEE8',
       gray300: '#C9C5D4',
@@ -44,7 +43,6 @@ export const darkTheme = {
   colors: {
       primary: '#191847',
       secondary: ' #F5850B',
-      secondaryLight: '#F5850B',
       gray100: '#F4F3F6',
       gray200: '#E1DEE8',
       gray300: '#C9C5D4',
