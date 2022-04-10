@@ -2,6 +2,7 @@ import CustomThemeProvider from './contexts/ThemeContext';
 import { Header } from './components/Header';
 import GlobalStyle from './styles/global';
 import Checkout from './pages/Checkout';
+import OffersProvider from './contexts/OffersContext';
 
 function App() {
   return (
@@ -9,7 +10,9 @@ function App() {
       <GlobalStyle />
       <div className="container">
         <Header />
-        <Checkout />
+        <OffersProvider>
+          <Checkout />
+        </OffersProvider>
       </div>
     </CustomThemeProvider>
   );

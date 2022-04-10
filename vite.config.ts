@@ -6,4 +6,7 @@ import svgr from '@honkhonk/vite-plugin-svgr';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svgr(), react()],
+  define: {
+    'process.env': process.env,
+  },
 });

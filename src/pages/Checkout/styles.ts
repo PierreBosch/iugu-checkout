@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const FormContainer = styled.form`
   width: 100%;
   min-height: calc(100vh - 90px);
   max-width: 870px;
@@ -122,7 +122,7 @@ export const Payment = styled.div`
   }
 `;
 
-export const Plans = styled.div`
+export const Offers = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -149,12 +149,12 @@ export const Plans = styled.div`
     }
   }
 
-  .plans {
+  .offers {
     display: flex;
     flex-direction: column;
     row-gap: ${({ theme }) => theme.spacing_12};
 
-    &__plan {
+    &__offer {
       width: 100%;
       display: flex;
       align-items: center;
@@ -221,8 +221,7 @@ export const Plans = styled.div`
       height: 16px;
 
       border: 2px solid ${({ theme }) => theme.colors.gray300};
-      transition: 0.2s all linear;
-      margin-right: 5px;
+      transition: 300ms;
 
       position: relative;
       top: 4px;

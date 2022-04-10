@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { FiHelpCircle } from 'react-icons/fi';
 
 import AmericanExpressSvg from '../../assets/images/card-flags/americanexpress.svg?component';
@@ -6,12 +7,40 @@ import EloSvg from '../../assets/images/card-flags/elo.svg?component';
 import MastercardSvg from '../../assets/images/card-flags/mastercard.svg?component';
 import VisaSvg from '../../assets/images/card-flags/visa.svg?component';
 import IuguSvg from '../../assets/images/iugu.svg?component';
+import { useOffers } from '../../contexts/OffersContext';
 
 import * as S from './styles';
 
+type Offer = {
+  acceptsCoupon: boolean;
+  caption: string;
+  description: string;
+  discountAmmount: number;
+  discountCouponCode: string;
+  discountPercentage: number;
+  fullPrice: number;
+  gateway: string;
+  id: number;
+  installments: number;
+  order: number;
+  period: string;
+  periodLabel: string;
+  priority: number;
+  splittable: boolean;
+  storeId: string;
+  title: string;
+};
+
 function Checkout() {
+  const [offers, setOffers] = useState<Offer[]>([]);
+  const { getOffers } = useOffers();
+
+  useEffect(() => {
+    getOffers().then((offersResponse: any) => setOffers(offersResponse));
+  }, []);
+
   return (
-    <S.Container>
+    <S.FormContainer>
       <S.Payment>
         <div className="header">
           <h1 className="header__title">Estamos quase lá!</h1>
@@ -52,11 +81,12 @@ function Checkout() {
 
         <form className="form">
           <div className="input full-width">
-            <label htmlFor="card" className="input__label">
+            <label htmlFor="creditCardNumber" className="input__label">
               Número do cartão
             </label>
             <input
-              id="card-number"
+              id="creditCardNumber"
+              name="creditCardNumber"
               type="text"
               placeholder="0000 0000 0000 0000 0000"
               className="input__field"
@@ -64,11 +94,12 @@ function Checkout() {
           </div>
 
           <div className="input">
-            <label htmlFor="card" className="input__label">
-              Número do cartão
+            <label htmlFor="creditCardExpirationDate" className="input__label">
+              Validade
             </label>
             <input
-              id="card-number"
+              id="creditCardExpirationDate"
+              name="creditCardExpirationDate"
               type="text"
               placeholder="MM AA"
               className="input__field"
@@ -76,11 +107,12 @@ function Checkout() {
           </div>
 
           <div className="input">
-            <label htmlFor="card" className="input__label">
+            <label htmlFor="creditCardCVV" className="input__label">
               Número do cartão
             </label>
             <input
-              id="card-number"
+              id="creditCardCVV"
+              name="creditCardCVV"
               type="text"
               placeholder="000"
               className="input__field"
@@ -88,11 +120,12 @@ function Checkout() {
           </div>
 
           <div className="input full-width">
-            <label htmlFor="card" className="input__label">
+            <label htmlFor="creditCardHolder" className="input__label">
               Nome impresso no cartão
             </label>
             <input
-              id="card-number"
+              id="creditCardHolder"
+              name="creditCardHolder"
               type="text"
               placeholder="Seu nome"
               className="input__field"
@@ -100,11 +133,12 @@ function Checkout() {
           </div>
 
           <div className="input full-width">
-            <label htmlFor="card" className="input__label">
+            <label htmlFor="creditCardCPF" className="input__label">
               CPF
             </label>
             <input
-              id="card-number"
+              name="creditCardCPF"
+              id="creditCardCPF"
               type="text"
               placeholder="000.000.000-00"
               className="input__field"
@@ -112,11 +146,12 @@ function Checkout() {
           </div>
 
           <div className="input full-width">
-            <label htmlFor="card" className="input__label">
+            <label htmlFor="couponCode" className="input__label">
               Cupom
             </label>
             <input
-              id="card-number"
+              name="couponCode"
+              id="couponCode"
               type="text"
               placeholder="Insira aqui"
               className="input__field"
@@ -124,10 +159,14 @@ function Checkout() {
           </div>
 
           <div className="input full-width">
-            <label htmlFor="card" className="input__label">
+            <label htmlFor="installments" className="input__label">
               Número de parcelas
             </label>
-            <select id="card-number" className="input__field">
+            <select
+              name="installments"
+              id="installments"
+              className="input__field"
+            >
               <option value="" disabled selected>
                 Selecionar
               </option>
@@ -140,54 +179,47 @@ function Checkout() {
         </form>
       </S.Payment>
 
-      <S.Plans>
+      <S.Offers>
         <div className="header">
           <h1 className="header__title">Confira o seu plano:</h1>
           <span className="header__user-email">fulano@ciclano.com</span>
         </div>
 
-        <ul className="plans">
-          <label htmlFor="plan_1" className="plans__plan">
-            <div className="plans__data">
-              <strong className="plans__label">Anual | À vista</strong>
-              <span className="plans__amount">
-                De R$ 514,80 | Por R$ 436,90
-                <span className="plans__discount">-10%</span>
-              </span>
-              <span className="plans__installments">10x de R$ 43,69/mês</span>
-            </div>
-            <input
-              id="plan_1"
-              type="radio"
-              name="plan"
-              className="plans__checkmark"
-            />
-          </label>
-
-          <label htmlFor="plan_2" className="plans__plan">
-            <div className="plans__data">
-              <strong className="plans__label">Anual | À vista</strong>
-              <span className="plans__amount">
-                De R$ 514,80 | Por R$ 436,90
-                <span className="plans__discount">-7%</span>
-              </span>
-              <span className="plans__installments">10x de R$ 43,69/mês</span>
-            </div>
-            <input
-              id="plan_2"
-              type="radio"
-              name="plan"
-              className="plans__checkmark"
-            />
-          </label>
+        <ul className="offers">
+          {offers.map((offer: Offer) => (
+            <label
+              key={offer.id}
+              htmlFor={`${offer.id}`}
+              className="offers__offer"
+            >
+              <div className="offers__data">
+                <strong className="offers__label">{`${offer.title} | ${offer.description}`}</strong>
+                <span className="offers__amount">
+                  De R$ 514,80 | Por R$ 436,90
+                  <span className="offers__discount">
+                    {`${offer.discountPercentage * 100 * -1}%`}
+                  </span>
+                </span>
+                <span className="offers__installments">
+                  {`${offer.installments}x de R$ 43,69/mês`}
+                </span>
+              </div>
+              <input
+                id={`${offer.id}`}
+                type="radio"
+                name="offer"
+                className="offers__checkmark"
+              />
+            </label>
+          ))}
         </ul>
 
-        <div className="plans__about-charge">
+        <div className="offers__about-charge">
           Sobre a cobrança
           <FiHelpCircle size={16} />
         </div>
-      </S.Plans>
-    </S.Container>
+      </S.Offers>
+    </S.FormContainer>
   );
 }
 
