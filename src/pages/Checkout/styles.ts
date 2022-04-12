@@ -22,7 +22,7 @@ export const FormContainer = styled.form`
   }
 `;
 
-export const Payment = styled.div`
+export const Payment = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -83,71 +83,17 @@ export const Payment = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     flex-direction: column;
+    align-items: flex-start;
     row-gap: ${({ theme }) => theme.spacing_30};
     column-gap: ${({ theme }) => theme.spacing_40};
 
     .full-width {
-      grid-column: 1 / 3;
-    }
-
-    .input {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      height: 50px;
-
-      &__label {
-        color: ${({ theme }) => theme.colors.gray400};
-        font-size: ${({ theme }) => theme.smallerFontSize};
-      }
-
-      &__field {
-        width: 100%;
-        border: none;
-        border-bottom: 1px solid ${({ theme }) => theme.colors.gray100};
-        outline: none;
-        font-size: ${({ theme }) => theme.normalFontSize};
-        padding-top: ${({ theme }) => theme.spacing_4};
-        padding-bottom: ${({ theme }) => theme.spacing_12};
-        color: ${({ theme }) => theme.colors.gray400};
-        font-size: 1rem;
-        transition: border 200ms;
-
-        ::placeholder {
-          color: ${({ theme }) => theme.colors.gray300};
-        }
-
-        :focus {
-          border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
-        }
-      }
-
-      &__error {
-        color: #DE4841;
-        font-size: ${({theme}) => theme.smallFontSize};
-      }
-    }
-
-    .button {
-      width: 100%;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 25px;
-      background: ${({ theme }) => theme.colors.primary};
-      transition: 200ms;
-      color: ${({ theme }) => theme.colors.body};
-      font-size: ${({ theme }) => theme.smallFontSize};
-
-      :hover {
-        filter: brightness(150%);
-      }
+      grid-column: 1/3;
     }
   }
 `;
 
-export const Offers = styled.div`
+export const Offers = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;

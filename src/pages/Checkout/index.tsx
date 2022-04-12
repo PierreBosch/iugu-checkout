@@ -1,19 +1,18 @@
-
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
 import { FiHelpCircle } from 'react-icons/fi';
-import MaskedInput from "react-text-mask";
 import AmericanExpressSvg from '../../assets/images/card-flags/americanexpress.svg?component';
 import DinnersClubSvg from '../../assets/images/card-flags/dinnersclub.svg?component';
 import EloSvg from '../../assets/images/card-flags/elo.svg?component';
 import MastercardSvg from '../../assets/images/card-flags/mastercard.svg?component';
 import VisaSvg from '../../assets/images/card-flags/visa.svg?component';
 import IuguSvg from '../../assets/images/iugu.svg?component';
+import ButtonPrimary from '../../components/Button';
+import Input from '../../components/Input';
 import { useOffers } from '../../contexts/OffersContext';
 import { CARD_MASK, CPF_MASK, EXPIRATION_MASK } from '../../helpers/Masks';
 import * as S from './styles';
 import { paymentSchema } from './validations';
-
 
 type Offer = {
   acceptsCoupon: boolean;
@@ -84,13 +83,13 @@ function Checkout() {
   return (
     <S.FormContainer onSubmit={paymentForm.handleSubmit}>
       <S.Payment>
-        <div className="header">
+        <header className="header">
           <h1 className="header__title">Estamos quase lá!</h1>
 
           <span className="header__description">
             Insira seus dados de pagamento abaixo
           </span>
-        </div>
+        </header>
 
         <div className="cards">
           <ul className="cards__flags">
@@ -122,146 +121,133 @@ function Checkout() {
         </div>
 
         <div className="form">
-          <div className="input full-width">
-            <label htmlFor="creditCardNumber" className="input__label">
-              Número do cartão
-            </label>
-            <MaskedInput
-              mask={CARD_MASK}
-              id="creditCardNumber"
-              name="creditCardNumber"
-              type="text"
-              placeholder="0000 0000 0000 0000 0000"
-              className="input__field"
-              guide={false}
-              value={paymentForm.values.creditCardNumber}
-              onChange={paymentForm.handleChange}
-              onBlur={paymentForm.handleBlur}
-            />
-            {paymentForm.touched.creditCardNumber && paymentForm.errors.creditCardNumber && (
-              <span className="input__error">
-                {paymentForm.errors.creditCardNumber}
-              </span>
-            )}
-          </div>
+          <Input
+            fullWidth
+            label="Número do cartão"
+            mask={CARD_MASK}
+            id="creditCardNumber"
+            name="creditCardNumber"
+            type="text"
+            placeholder="0000 0000 0000 0000 0000"
+            guide={false}
+            value={paymentForm.values.creditCardNumber}
+            onChange={paymentForm.handleChange}
+            onBlur={paymentForm.handleBlur}
+            errorMessage={
+              paymentForm.touched.creditCardNumber &&
+              paymentForm.errors.creditCardNumber
+                ? paymentForm.errors.creditCardNumber
+                : null
+            }
+          />
 
-          <div className="input">
-            <label htmlFor="creditCardExpirationDate" className="input__label">
-              Validade
-            </label>
-            <MaskedInput
-              mask={EXPIRATION_MASK}
-              guide={false}
-              id="creditCardExpirationDate"
-              name="creditCardExpirationDate"
-              type="text"
-              placeholder="MM AA"
-              className="input__field"
-              value={paymentForm.values.creditCardExpirationDate}
-              onChange={paymentForm.handleChange}
-              onBlur={paymentForm.handleBlur}
-            />
-            {paymentForm.touched.creditCardExpirationDate && paymentForm.errors.creditCardExpirationDate && (
-              <span className="input__error">
-                {paymentForm.errors.creditCardExpirationDate}
-              </span>
-            )}
-          </div>
+          <Input
+            label="Validade"
+            mask={EXPIRATION_MASK}
+            guide={false}
+            id="creditCardExpirationDate"
+            name="creditCardExpirationDate"
+            type="text"
+            placeholder="MM AA"
+            value={paymentForm.values.creditCardExpirationDate}
+            onChange={paymentForm.handleChange}
+            onBlur={paymentForm.handleBlur}
+            errorMessage={
+              paymentForm.touched.creditCardExpirationDate &&
+              paymentForm.errors.creditCardExpirationDate
+                ? paymentForm.errors.creditCardExpirationDate
+                : null
+            }
+          />
 
-          <div className="input">
-            <label htmlFor="creditCardCVV" className="input__label">
-              Número do cartão
-            </label>
-            <input
-              id="creditCardCVV"
-              name="creditCardCVV"
-              type="text"
-              placeholder="000"
-              className="input__field"
-              value={paymentForm.values.creditCardCVV}
-              onChange={paymentForm.handleChange}
-              onBlur={paymentForm.handleBlur}
-            />
-            {paymentForm.touched.creditCardCVV && paymentForm.errors.creditCardCVV && (
-              <span className="input__error">
-                {paymentForm.errors.creditCardCVV}
-              </span>
-            )}
-          </div>
+          <Input
+            label="CVV"
+            id="creditCardCVV"
+            name="creditCardCVV"
+            type="text"
+            placeholder="000"
+            value={paymentForm.values.creditCardCVV}
+            onChange={paymentForm.handleChange}
+            onBlur={paymentForm.handleBlur}
+            errorMessage={
+              paymentForm.touched.creditCardCVV &&
+              paymentForm.errors.creditCardCVV
+                ? paymentForm.errors.creditCardCVV
+                : null
+            }
+          />
 
-          <div className="input full-width">
-            <label htmlFor="creditCardHolder" className="input__label">
-              Nome impresso no cartão
-            </label>
-            <input
-              id="creditCardHolder"
-              name="creditCardHolder"
-              type="text"
-              placeholder="Seu nome"
-              className="input__field"
-              value={paymentForm.values.creditCardHolder.toUpperCase()}
-              onChange={paymentForm.handleChange}
-              onBlur={paymentForm.handleBlur}
-            />
-            {paymentForm.touched.creditCardHolder && paymentForm.errors.creditCardHolder && (
-              <span className="input__error">
-                {paymentForm.errors.creditCardHolder}
-              </span>
-            )}
-          </div>
+          <Input
+            fullWidth
+            label="Nome impresso no cartão"
+            id="creditCardHolder"
+            name="creditCardHolder"
+            type="text"
+            placeholder="Seu nome"
+            value={paymentForm.values.creditCardHolder.toUpperCase()}
+            onChange={paymentForm.handleChange}
+            onBlur={paymentForm.handleBlur}
+            errorMessage={
+              paymentForm.touched.creditCardHolder &&
+              paymentForm.errors.creditCardHolder
+                ? paymentForm.errors.creditCardHolder
+                : null
+            }
+          />
 
-          <div className="input full-width">
-            <label htmlFor="creditCardCPF" className="input__label">
-              CPF
-            </label>
-            <MaskedInput
-              mask={CPF_MASK}
-              guide={false}
-              name="creditCardCPF"
-              id="creditCardCPF"
-              type="text"
-              placeholder="000.000.000-00"
-              className="input__field"
-              value={paymentForm.values.creditCardCPF}
-              onChange={paymentForm.handleChange}
-              onBlur={paymentForm.handleBlur}
-            />
-            {paymentForm.touched.creditCardCPF && paymentForm.errors.creditCardCPF && (
-              <span className="input__error">
-                {paymentForm.errors.creditCardCPF}
-              </span>
-            )}
-          </div>
+          <Input
+            fullWidth
+            mask={CPF_MASK}
+            label="CPF"
+            hasMask
+            guide={false}
+            name="creditCardCPF"
+            id="creditCardCPF"
+            type="text"
+            placeholder="000.000.000-00"
+            value={paymentForm.values.creditCardCPF}
+            onChange={paymentForm.handleChange}
+            onBlur={paymentForm.handleBlur}
+            errorMessage={
+              paymentForm.touched.creditCardCPF &&
+              paymentForm.errors.creditCardCPF
+                ? paymentForm.errors.creditCardCPF
+                : null
+            }
+          />
 
-          <div className="input full-width">
-            <label htmlFor="couponCode" className="input__label">
-              Cupom
-            </label>
-            <input
-              name="couponCode"
-              id="couponCode"
-              type="text"
-              placeholder="Insira aqui"
-              className="input__field"
-              value={paymentForm.values.couponCode}
-              onChange={paymentForm.handleChange}
-              onBlur={paymentForm.handleBlur}
-            />
-            {paymentForm.touched.couponCode && paymentForm.errors.couponCode && (
-              <span className="input__error">
-                {paymentForm.errors.couponCode}
-              </span>
-            )}
-          </div>
+          <Input
+            fullWidth
+            label="Cupom"
+            name="couponCode"
+            id="couponCode"
+            type="text"
+            placeholder="Insira aqui"
+            value={paymentForm.values.couponCode}
+            onChange={paymentForm.handleChange}
+            onBlur={paymentForm.handleBlur}
+            errorMessage={
+              paymentForm.touched.couponCode && paymentForm.errors.couponCode
+                ? paymentForm.errors.couponCode
+                : null
+            }
+          />
 
           <div className="input full-width">
-            <label htmlFor="installments" className="input__label">
-              Número de parcelas
-            </label>
+            {paymentForm.touched.installments &&
+              paymentForm.errors.installments && (
+                <span className="input__error-message">
+                  {paymentForm.errors.installments}
+                </span>
+              )}
             <select
               name="installments"
               id="installments"
-              className="input__field"
+              className={`input__field ${
+                paymentForm.touched.installments &&
+                paymentForm.errors.installments &&
+                'input__field--error'
+              }`}
               value={paymentForm.values.installments}
               onChange={paymentForm.handleChange}
               onBlur={paymentForm.handleBlur}
@@ -273,32 +259,29 @@ function Checkout() {
               {[...Array(selectedOffer?.installments).keys()].map(
                 (item, numeroParcela) => (
                   <option key={item}>{`${numeroParcela + 1}`}</option>
-                ))}
+                )
+              )}
             </select>
-            {paymentForm.touched.installments && paymentForm.errors.installments && (
-              <span className="input__error">
-                {paymentForm.errors.installments}
-              </span>
-            )}
+            <label htmlFor="installments" className="input__label">
+              Número de parcelas
+            </label>
           </div>
 
-          <button type="submit" className="button button-primary full-width">
+          <ButtonPrimary type="submit" classes={`full-width`}>
             Finalizar pagamento
-          </button>
+          </ButtonPrimary>
         </div>
       </S.Payment>
 
       <S.Offers>
-        <div className="header">
+        <header className="header">
           <h1 className="header__title">Confira o seu plano:</h1>
           <span className="header__user-email">fulano@ciclano.com</span>
-        </div>
+        </header>
 
         <ul className="offers">
           {paymentForm.touched.offerId && paymentForm.errors.offerId && (
-            <span className="input__error">
-              {paymentForm.errors.offerId}
-            </span>
+            <span className="input__error">{paymentForm.errors.offerId}</span>
           )}
           {offers.map((offer: Offer) => (
             <label
@@ -324,7 +307,7 @@ function Checkout() {
                 name="offerId"
                 className="offers__checkmark"
                 value={offer.id}
-                onChange={(e) => {
+                onChange={e => {
                   paymentForm.handleChange(e.target.value);
                   setSelectedOffer(offer);
                 }}
