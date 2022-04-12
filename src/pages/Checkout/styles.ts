@@ -7,16 +7,32 @@ export const FormContainer = styled.form`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  column-gap: ${({ theme }) => theme.spacing_16};
   background: ${({ theme }) => theme.colors.body};
-  padding: 4rem 0;
+  padding: ${({ theme }) => `${theme.spacing_40} ${theme.spacing_30}`};
+
+  @media (max-width: 660px) {
+    flex-direction: column-reverse;
+    row-gap: 2rem;
+    padding: 2rem;
+  }
+
+  @media (max-width: 385px) {
+    padding: 1rem;
+  }
 `;
 
 export const Payment = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: max-content;
   max-width: 330px;
   row-gap: ${({ theme }) => theme.spacing_30};
+
+  @media (max-width: 660px) {
+    max-width: 100%;
+  }
 
   .header {
     display: flex;
@@ -63,6 +79,7 @@ export const Payment = styled.div`
 
   .form {
     width: 100%;
+    height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     flex-direction: column;
@@ -74,6 +91,7 @@ export const Payment = styled.div`
     }
 
     .input {
+      width: 100%;
       display: flex;
       flex-direction: column;
       height: 50px;
@@ -84,14 +102,16 @@ export const Payment = styled.div`
       }
 
       &__field {
+        width: 100%;
         border: none;
         border-bottom: 1px solid ${({ theme }) => theme.colors.gray100};
         outline: none;
         font-size: ${({ theme }) => theme.normalFontSize};
         padding-top: ${({ theme }) => theme.spacing_4};
         padding-bottom: ${({ theme }) => theme.spacing_12};
-        color: ${({ theme }) => theme.colors.gray300};
-        transition: border 300ms;
+        color: ${({ theme }) => theme.colors.gray400};
+        font-size: 1rem;
+        transition: border 200ms;
 
         ::placeholder {
           color: ${({ theme }) => theme.colors.gray300};
@@ -100,6 +120,11 @@ export const Payment = styled.div`
         :focus {
           border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
         }
+      }
+
+      &__error {
+        color: #DE4841;
+        font-size: ${({theme}) => theme.smallFontSize};
       }
     }
 
@@ -111,7 +136,7 @@ export const Payment = styled.div`
       justify-content: center;
       border-radius: 25px;
       background: ${({ theme }) => theme.colors.primary};
-      transition: 300ms;
+      transition: 200ms;
       color: ${({ theme }) => theme.colors.body};
       font-size: ${({ theme }) => theme.smallFontSize};
 
@@ -163,6 +188,12 @@ export const Offers = styled.div`
       border: 1px solid ${({ theme }) => theme.colors.primary};
       border-radius: 15px;
       cursor: pointer;
+      column-gap: 0.5rem;
+
+      :hover .offers__discount {
+        transition: 200ms ease-in-out;
+        transform: translateY(-0.25rem);
+      }
     }
 
     &__data {
@@ -194,6 +225,7 @@ export const Offers = styled.div`
       color: ${({ theme }) => theme.colors.body};
       font-size: ${({ theme }) => theme.smallerFontSize};
       padding: ${({ theme }) => `${theme.spacing_4} ${theme.spacing_8}`};
+      transition: 200ms ease-in-out;
     }
 
     &__installments {
@@ -209,6 +241,16 @@ export const Offers = styled.div`
       column-gap: ${({ theme }) => theme.spacing_12};
       font-size: ${({ theme }) => theme.smallerFontSize};
       color: ${({ theme }) => theme.colors.gray900};
+      cursor: pointer;
+
+      .offers__icon {
+        transition: 200ms ease-in-out;
+      }
+
+      :hover .offers__icon {
+        transition: 200ms ease-in-out;
+        transform: translateY(-0.25rem);
+      }
     }
 
     &__checkmark {
@@ -221,7 +263,7 @@ export const Offers = styled.div`
       height: 16px;
 
       border: 2px solid ${({ theme }) => theme.colors.gray300};
-      transition: 300ms;
+      transition: 200ms;
 
       position: relative;
       top: 4px;

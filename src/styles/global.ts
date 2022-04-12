@@ -62,6 +62,10 @@ const GlobalStyle = createGlobalStyle`
         margin: 0 auto;
         width: 100%;
         max-width: 1080px;
+
+        @media(max-width: 660px) {
+            max-width: 100%;
+        }
     }
 `;
 

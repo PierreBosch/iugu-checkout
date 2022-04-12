@@ -3,7 +3,12 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["airbnb", "airbnb-typescript"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -15,6 +20,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
+    "comma-dangle": 0,
+    "@typescript-eslint/comma-dangle": ["error"],
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
@@ -32,11 +39,21 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": "error",
     "react/jsx-filename-extension": [
       1,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 100,
+        "tabWidth": 4,
+        "semi": true,
+        "endOfLine": "auto"
+      }
+    ]
   }
 }
