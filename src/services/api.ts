@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://private-0ced4-pebmeddesafiofrontend.apiary-mock.com',
+  baseURL: import.meta.env.VITE_APP_API_URL,
 });
 
 export default api;
