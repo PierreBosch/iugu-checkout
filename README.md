@@ -34,14 +34,12 @@
   <a href="#%EF%B8%8F-about-the-project">About the project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-how-to-contribute">How to contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-license">License</a>
 </p>
 
 </br>
 
 <p align="center">
-  <img alt="Layout" src="https://s7.gifyu.com/images/CPT2204130010-1080x807.gif">
+  <img width="800" alt="Layout" src="./print-checkout.png">
 </p>
 
 ## 🖥 About the project
@@ -73,6 +71,12 @@ Technologies that I used to develop this web client
 - [Figma](https://shorturl.ae/4HaUS)
 
 ## 💻 Getting started
+
+<p id="insomniaButton" align="center">
+  <a href="https://insomnia.rest/run/?label=Whitebook&uri=https%3A%2F%2Fgithub.com%2FPierreBosch%2Fiugu-checkout%2Fblob%2Ffeature%2Fiugu-checkout%2Finsomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+</p>
+
+<p align="center">Import the `Insomnia.json` on Insomnia App or click on Run on Insomnia button</p>
 
 **Clone the project and access the folder**
 
