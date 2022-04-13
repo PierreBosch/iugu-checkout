@@ -1,0 +1,107 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-04-13T03:52:54.703Z",
+  "__export_source": "insomnia.desktop.app:v2022.2.1",
+  "resources": [
+    {
+      "_id": "req_3b9cd76872444855a39b9a040e9489ec",
+      "parentId": "wrk_5e126e49447e47f781f076c00c4c8627",
+      "modified": 1649821925188,
+      "created": 1649821761395,
+      "url": "{{ _.baseUrl }}/subscription",
+      "name": "Payment",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"couponCode\": null,\n\t\"creditCardCPF\": \"98765432100\",\n\t\"creditCardCVV\": \"123\",\n\t\"creditCardExpirationDate\": \"10/21\",\n\t\"creditCardHolder\": \"Cássio Scofield\",\n\t\"creditCardNumber\": \"5555444433332222\",\n\t\"installments\": \"1\",\n\t\"offerId\": \"18\",\n\t\"gateway\": \"iugu\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_91f08e3b3c0449799d553769fae2eb1e"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1649821761395,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_5e126e49447e47f781f076c00c4c8627",
+      "parentId": null,
+      "modified": 1649821752465,
+      "created": 1649821752465,
+      "name": "Whitebook",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_e7e6225f866348fab36701fb06be36d7",
+      "parentId": "wrk_5e126e49447e47f781f076c00c4c8627",
+      "modified": 1649821938810,
+      "created": 1649821757844,
+      "url": "{{ _.baseUrl }}/offer",
+      "name": "Offers",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1649821757844,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_544814f3b90bcf2757e7648710e37a08b69ac393",
+      "parentId": "wrk_5e126e49447e47f781f076c00c4c8627",
+      "modified": 1649821950566,
+      "created": 1649821752468,
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "https://private-0ced4-pebmeddesafiofrontend.apiary-mock.com"
+      },
+      "dataPropertyOrder": { "&": ["baseUrl"] },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1649821752468,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_544814f3b90bcf2757e7648710e37a08b69ac393",
+      "parentId": "wrk_5e126e49447e47f781f076c00c4c8627",
+      "modified": 1649821752469,
+      "created": 1649821752469,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_7be9e8ba67b1447fa05ef251f9fb58e1",
+      "parentId": "wrk_5e126e49447e47f781f076c00c4c8627",
+      "modified": 1649821752466,
+      "created": 1649821752466,
+      "fileName": "Whitebook",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
