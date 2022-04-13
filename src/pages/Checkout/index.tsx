@@ -10,6 +10,7 @@ import IuguSvg from '../../assets/images/iugu.svg?component';
 import ButtonPrimary from '../../components/Button';
 import Input from '../../components/Input';
 import { useOffers } from '../../contexts/OffersContext';
+import { usePayment } from '../../contexts/PaymentContext';
 import { CARD_MASK, CPF_MASK, EXPIRATION_MASK } from '../../helpers/Masks';
 import * as S from './styles';
 import { paymentSchema } from './validations';
@@ -34,14 +35,14 @@ type Offer = {
   title: string;
 };
 
-type PaymentRequest = {
+export type PaymentRequest = {
   couponCode: string;
   creditCardCPF: string;
   creditCardCVV: string;
   creditCardExpirationDate: string;
   creditCardHolder: string;
   creditCardNumber: string;
-  gateway: string;
+  gateway?: string;
   installments: string;
   offerId: string;
 };
@@ -50,6 +51,7 @@ function Checkout() {
   const [offers, setOffers] = useState<Offer[]>([]);
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
   const { getOffers } = useOffers();
+  const { paySubscription } = usePayment();
 
   const paymentForm = useFormik({
     initialValues: {
@@ -59,24 +61,27 @@ function Checkout() {
       creditCardExpirationDate: '',
       creditCardHolder: '',
       creditCardNumber: '',
-      gateway: '',
-      installments: '',
+      installments: '1',
       offerId: '',
     },
     enableReinitialize: false,
     validateOnMount: true,
     validationSchema: paymentSchema,
-    onSubmit: (paymentData: PaymentRequest) => {
-      console.log(paymentData);
+    onSubmit: (paymentData: PaymentRequest, actions) => {
+      paySubscription(paymentData).then(() => {
+        actions.setSubmitting(false);
+      });
     },
   });
 
   useEffect(() => {
     getOffers().then((offersResponse: any) => {
       const [defaultOffer] = offersResponse;
+
+      paymentForm.setFieldValue('offerId', defaultOffer.id);
+
       setOffers(offersResponse);
       setSelectedOffer(defaultOffer);
-      paymentForm.setFieldValue('offerId', defaultOffer.id);
     });
   }, []);
 
@@ -125,6 +130,7 @@ function Checkout() {
             fullWidth
             label="Número do cartão"
             mask={CARD_MASK}
+            hasMask
             id="creditCardNumber"
             name="creditCardNumber"
             type="text"
@@ -144,6 +150,7 @@ function Checkout() {
           <Input
             label="Validade"
             mask={EXPIRATION_MASK}
+            hasMask
             guide={false}
             id="creditCardExpirationDate"
             name="creditCardExpirationDate"
@@ -267,7 +274,11 @@ function Checkout() {
             </label>
           </div>
 
-          <ButtonPrimary type="submit" classes={`full-width`}>
+          <ButtonPrimary
+            disabled={paymentForm.isSubmitting || !paymentForm.isValid}
+            type="submit"
+            classes={`full-width`}
+          >
             Finalizar pagamento
           </ButtonPrimary>
         </div>
@@ -307,6 +318,7 @@ function Checkout() {
                 name="offerId"
                 className="offers__checkmark"
                 value={offer.id}
+                checked={offer.id.toString() === selectedOffer?.id.toString()}
                 onChange={e => {
                   paymentForm.handleChange(e.target.value);
                   setSelectedOffer(offer);

@@ -21,7 +21,12 @@ export const Button = styled.button<ButtonProps>`
     column-gap: 0.75rem};
   `}
 
-  :hover {
+  :hover:not(:disabled) {
     filter: brightness(150%);
+  }
+
+  :disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
   }
 `;
