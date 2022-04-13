@@ -41,7 +41,7 @@
 </br>
 
 <p align="center">
-  <img alt="Layout" src="https://s7.gifyu.com/images/CPT2204122349-1080x807.gif">
+  <img alt="Layout" src="https://s7.gifyu.com/images/CPT2204130010-1080x807.gif">
 </p>
 
 ## 🖥 About the project

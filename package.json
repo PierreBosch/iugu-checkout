@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/react-text-mask": "^5.4.11",
@@ -20,6 +21,8 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@honkhonk/vite-plugin-svgr": "^1.1.0",
     "@types/node": "^17.0.23",
     "@types/react": "^17.0.33",
@@ -37,6 +40,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
+    "husky": "^7.0.4",
     "prettier": "^2.6.2",
     "typescript": "^4.5.4",
     "vite": "^2.9.0"
