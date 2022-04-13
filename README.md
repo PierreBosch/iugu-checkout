@@ -73,10 +73,10 @@ Technologies that I used to develop this web client
 ## 💻 Getting started
 
 <p id="insomniaButton" align="center">
-  <a href="https://insomnia.rest/run?label=Vialaser%20todo&uri=https%3A%2F%2Fgithub.com%2FPierreBosch%2Ftodo-list-test%2Fblob%2Fmaster%2Fvialaser-todo-insomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+  <a href="https://insomnia.rest/run/?label=Whitebook&uri=https%3A%2F%2Fgithub.com%2FPierreBosch%2Fiugu-checkout%2Fblob%2Ffeature%2Fiugu-checkout%2Finsomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 
-<p align="center">Import the `Insomnia.json` on Insomnia App or click on [Run in Insomnia](#insomniaButton) button</p>
+<p align="center">Import the `Insomnia.json` on Insomnia App or click on Run on Insomnia button</p>
 
 **Clone the project and access the folder**
 
