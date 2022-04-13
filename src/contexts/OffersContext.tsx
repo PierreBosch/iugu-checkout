@@ -1,11 +1,11 @@
 import { createContext, useContext, useMemo } from 'react';
 import api from '../services/api';
 
-interface IPlansContext {
+interface IOffersContext {
   getOffers(): Promise<Array<[]>>;
 }
 
-const OffersContext = createContext<IPlansContext>({} as IPlansContext);
+const OffersContext = createContext<IOffersContext>({} as IOffersContext);
 
 export const useOffers = () => useContext(OffersContext);
 

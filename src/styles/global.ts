@@ -96,6 +96,7 @@ const GlobalStyle = createGlobalStyle`
         color: ${({ theme }) => theme.colors.gray400};
         font-size: 1rem;
         transition: border 200ms;
+        background: transparent;
 
         ::placeholder {
             color: ${({ theme }) => theme.colors.gray300};
