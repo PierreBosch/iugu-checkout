@@ -46,6 +46,8 @@
 
 ## 🖥 About the project
 
+This project is a simulation of a checkout using iugu as a payment gateway.
+
 ## 🚀 Technologies
 
 Technologies that I used to develop this web client
