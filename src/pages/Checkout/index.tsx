@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
 import { FiHelpCircle } from 'react-icons/fi';
@@ -9,48 +10,16 @@ import VisaSvg from '../../assets/images/card-flags/visa.svg?component';
 import IuguSvg from '../../assets/images/iugu.svg?component';
 import ButtonPrimary from '../../components/Button';
 import Input from '../../components/Input';
-import { useOffers } from '../../contexts/OffersContext';
-import { usePayment } from '../../contexts/PaymentContext';
+import { Offer, useOffers } from '../../contexts/OffersContext';
+import { PaymentRequest, usePayment } from '../../contexts/PaymentContext';
+import { formatter } from '../../helpers/CurrencyFormatter';
 import { CARD_MASK, CPF_MASK, EXPIRATION_MASK } from '../../helpers/Masks';
 import * as S from './styles';
 import { paymentSchema } from './validations';
 
-type Offer = {
-  acceptsCoupon: boolean;
-  caption: string;
-  description: string;
-  discountAmmount: number;
-  discountCouponCode: string;
-  discountPercentage: number;
-  fullPrice: number;
-  gateway: string;
-  id: number;
-  installments: number;
-  order: number;
-  period: string;
-  periodLabel: string;
-  priority: number;
-  splittable: boolean;
-  storeId: string;
-  title: string;
-};
-
-export type PaymentRequest = {
-  couponCode: string;
-  creditCardCPF: string;
-  creditCardCVV: string;
-  creditCardExpirationDate: string;
-  creditCardHolder: string;
-  creditCardNumber: string;
-  gateway?: string;
-  installments: string;
-  offerId: string;
-};
-
 function Checkout() {
   const [offers, setOffers] = useState<Offer[]>([]);
-  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
-  const { getOffers } = useOffers();
+  const { getOffers, selectedOffer, setSelectedOffer } = useOffers();
   const { paySubscription } = usePayment();
 
   const paymentForm = useFormik({
@@ -137,7 +106,12 @@ function Checkout() {
             placeholder="0000 0000 0000 0000 0000"
             guide={false}
             value={paymentForm.values.creditCardNumber}
-            onChange={paymentForm.handleChange}
+            onChange={({ target: { value } }) =>
+              paymentForm.setFieldValue(
+                'creditCardNumber',
+                value.replace(/[^0-9]/g, ''),
+              )
+            }
             onBlur={paymentForm.handleBlur}
             errorMessage={
               paymentForm.touched.creditCardNumber &&
@@ -258,7 +232,7 @@ function Checkout() {
               value={paymentForm.values.installments}
               onChange={paymentForm.handleChange}
               onBlur={paymentForm.handleBlur}
-              defaultValue={'DEFAULT'}
+              data-testid="installments"
             >
               <option value="DEFAULT" disabled>
                 Selecione
@@ -266,7 +240,7 @@ function Checkout() {
               {[...Array(selectedOffer?.installments).keys()].map(
                 (item, numeroParcela) => (
                   <option key={item}>{`${numeroParcela + 1}`}</option>
-                )
+                ),
               )}
             </select>
             <label htmlFor="installments" className="input__label">
@@ -277,7 +251,7 @@ function Checkout() {
           <ButtonPrimary
             disabled={paymentForm.isSubmitting || !paymentForm.isValid}
             type="submit"
-            classes={`full-width`}
+            classes="full-width"
           >
             Finalizar pagamento
           </ButtonPrimary>
@@ -294,7 +268,7 @@ function Checkout() {
           {paymentForm.touched.offerId && paymentForm.errors.offerId && (
             <span className="input__error">{paymentForm.errors.offerId}</span>
           )}
-          {offers.map((offer: Offer) => (
+          {offers.map((offer: Offer, index) => (
             <label
               key={offer.id}
               htmlFor={`${offer.id}`}
@@ -303,13 +277,17 @@ function Checkout() {
               <div className="offers__data">
                 <strong className="offers__label">{`${offer.title} | ${offer.description}`}</strong>
                 <span className="offers__amount">
-                  De R$ 514,80 | Por R$ 436,90
+                  De {formatter.format(offer.fullPrice)} | Por{' '}
+                  {formatter.format(offer.fullPrice - offer.discountAmmount)}
                   <span className="offers__discount">
                     {`${offer.discountPercentage * 100 * -1}%`}
                   </span>
                 </span>
                 <span className="offers__installments">
-                  {`${offer.installments}x de R$ 43,69/mês`}
+                  {`${offer.installments}x de ${formatter.format(
+                    (offer.fullPrice - offer.discountAmmount) /
+                      offer.installments,
+                  )}/mês`}
                 </span>
               </div>
               <input
@@ -323,6 +301,7 @@ function Checkout() {
                   paymentForm.handleChange(e.target.value);
                   setSelectedOffer(offer);
                 }}
+                data-testid={`offerId-${index}`}
                 onBlur={paymentForm.handleBlur}
               />
             </label>

@@ -46,10 +46,11 @@
 ## 🖥 About the project
 
 This project is a simulation of a checkout using iugu as a payment gateway.
+In this project, triggers were added to ensure that all commits are made in the patterns of conventional commits, and triggers were added to correct the eslint patterns before the commit is finalized, in addition to using a pattern for writing CSS called BEM Pattern (BLOCK ELEMENT MODIFIER);
 
 ## 🚀 Technologies
 
-Technologies that I used to develop this web client
+Technologies and Patterns that I used to develop this web client
 
 - [Vite](https://vitejs.dev/) 💙
 - [ReactJS](https://reactjs.org/)
@@ -59,13 +60,15 @@ Technologies that I used to develop this web client
 - [Formik](https://formik.org/)
 - [Yup](https://github.com/jquense/yup)
 - [Styled Components](https://styled-components.com/)
+- [BEM Pattern](http://getbem.com/naming)
 - [Axios](https://github.com/axios/axios)
 - [Husky](https://github.com/typicode/husky)
 - [Commitlint](https://github.com/conventional-changelog/commitlint)
 - [Commitizen](https://github.com/commitizen/cz-cli)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
-- [EditorConfig](https://editorconfig.org/)
+- [Conventional Commits](https://prettier.io/)
+- [Lint-staged](https://github.com/okonet/lint-staged/)
 
 ## 🎨 Figma UI Design
 

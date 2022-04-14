@@ -2,11 +2,11 @@ import {
   createContext,
   useCallback,
   useContext,
-  useState,
   useMemo,
+  useState,
 } from 'react';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme } from '../styles/themes';
+import { darkTheme, lightTheme } from '../styles/themes';
 
 interface ThemeContextData {
   toggleTheme(): void;

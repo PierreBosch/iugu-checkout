@@ -1,27 +1,29 @@
-import { FC, InputHTMLAttributes } from 'react';
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/jsx-props-no-spreading */
+import { InputHTMLAttributes } from 'react';
 import MaskedInput from 'react-text-mask';
 import * as S from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
-  errorMessage: string | null;
+  errorMessage?: string | null;
   fullWidth?: boolean;
   hasMask?: boolean;
   mask?: (string | RegExp)[];
   guide?: boolean;
 }
 
-const Input: FC<InputProps> = ({
+function Input({
   name,
   label,
-  errorMessage,
+  errorMessage = null,
   guide = false,
   hasMask = false,
   mask = [''],
   fullWidth = false,
   ...rest
-}) => {
+}: InputProps) {
   return (
     <S.Container className="input" fullWidth={fullWidth}>
       {errorMessage !== null && (
@@ -33,7 +35,7 @@ const Input: FC<InputProps> = ({
           id={name}
           name={name}
           className={`input__field ${
-            errorMessage ? 'input__field--error' : ''
+            errorMessage !== null ? 'input__field--error' : ''
           }`}
           {...rest}
         />
@@ -46,7 +48,7 @@ const Input: FC<InputProps> = ({
           id={name}
           name={name}
           className={`input__field ${
-            errorMessage ? 'input__field--error' : ''
+            errorMessage !== null ? 'input__field--error' : ''
           }`}
           {...rest}
         />
@@ -57,6 +59,6 @@ const Input: FC<InputProps> = ({
       </label>
     </S.Container>
   );
-};
+}
 
 export default Input;

@@ -1,11 +1,18 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { FiCheck, FiStar } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import ButtonPrimary from '../../components/Button';
+import { useOffers } from '../../contexts/OffersContext';
+import { formatter } from '../../helpers/CurrencyFormatter';
 import * as S from './styles';
 
-const PaymentSuccess: React.FC = () => {
+function PaymentSuccess() {
   const navigate = useNavigate();
+  const { selectedOffer } = useOffers();
+
+  useEffect(() => {
+    if (selectedOffer === null) navigate('/');
+  }, []);
 
   return (
     <S.Container>
@@ -27,9 +34,18 @@ const PaymentSuccess: React.FC = () => {
           </div>
 
           <div className="subscription__data">
-            <span className="subscription__title">Anual | Parcelado</span>
+            <span className="subscription__title">{selectedOffer?.title}</span>
             <div className="subscription__installments">
-              R$ 479,90 | 10x R$ 47,99
+              {selectedOffer &&
+                formatter.format(
+                  selectedOffer.fullPrice - selectedOffer.discountAmmount,
+                )}
+              | {selectedOffer?.installments}x{' '}
+              {selectedOffer &&
+                formatter.format(
+                  (selectedOffer.fullPrice - selectedOffer.discountAmmount) /
+                    selectedOffer.installments,
+                )}
             </div>
           </div>
         </div>
@@ -48,16 +64,24 @@ const PaymentSuccess: React.FC = () => {
       </main>
 
       <footer className="actions">
-        <button onClick={() => navigate('/')} className="actions__action">
+        <button
+          type="button"
+          onClick={() => navigate('/')}
+          className="actions__action"
+        >
           Gerenciar Assinatura
         </button>
 
-        <ButtonPrimary onClick={() => navigate('/')}>
+        <ButtonPrimary
+          onClick={() => navigate('/')}
+          withIcon={false}
+          classes=""
+        >
           IR PARA HOME
         </ButtonPrimary>
       </footer>
     </S.Container>
   );
-};
+}
 
 export default PaymentSuccess;

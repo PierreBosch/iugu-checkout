@@ -6,20 +6,19 @@ export const Container = styled.header`
   background: ${({ theme }) => theme.colors.header};
   display: flex;
   align-items: center;
-
-  .header__navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-  }
+  position: relative;
 
   .header__link {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: transparent;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
     padding: ${({ theme }) => theme.spacing_8};
+    position: absolute;
+    top: 25px;
   }
 
   .header__link-icon {
@@ -30,6 +29,5 @@ export const Container = styled.header`
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-left: -40px;
   }
 `;
