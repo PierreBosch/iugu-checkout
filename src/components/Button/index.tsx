@@ -1,22 +1,24 @@
-import { ButtonHTMLAttributes, FC } from 'react';
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/jsx-props-no-spreading */
+import { ButtonHTMLAttributes } from 'react';
 import * as S from './styles';
 
 interface ButtonPrimaryProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   withIcon?: boolean;
-  classes?: string;
+  classes: string | '';
 }
 
-const ButtonPrimary: FC<ButtonPrimaryProps> = ({
+function ButtonPrimary({
   withIcon = false,
+  classes = '',
   children,
-  classes,
   ...rest
-}) => {
+}: ButtonPrimaryProps) {
   return (
     <S.Button withIcon={withIcon} className={`button ${classes}`} {...rest}>
       {children}
     </S.Button>
   );
-};
+}
 
 export default ButtonPrimary;

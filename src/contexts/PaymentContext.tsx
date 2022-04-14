@@ -1,12 +1,24 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PaymentRequest } from '../pages/Checkout';
+import { toast } from 'react-toastify';
 import api from '../services/api';
 
 interface IPaymentContext {
   paySubscription(payment: any): Promise<void | Error>;
   subscription: any;
 }
+
+export type PaymentRequest = {
+  couponCode: string;
+  creditCardCPF: string;
+  creditCardCVV: string;
+  creditCardExpirationDate: string;
+  creditCardHolder: string;
+  creditCardNumber: string;
+  gateway?: string;
+  installments: string;
+  offerId: string;
+};
 
 const PaymentContext = createContext<IPaymentContext>({} as IPaymentContext);
 
@@ -31,18 +43,22 @@ export default function PaymentProvider({ children }: any) {
         userId: 1,
       };
 
-      const { data: subscription } = await api.post('/subscription', {
+      const { data: subscriptionResponse } = await api.post('/subscription', {
         ...responseBody,
       });
 
-      setSubscription(subscription);
+      setSubscription(subscriptionResponse);
       navigate('/pagamento-efetuado');
     } catch (error: any) {
+      toast.error('Ocorreu um erro ao realizar pagamento');
       throw new Error(error);
     }
   }
 
-  const values = useMemo(() => ({ paySubscription, subscription }), []);
+  const values = useMemo(
+    () => ({ paySubscription, subscription }),
+    [subscription],
+  );
 
   return (
     <PaymentContext.Provider value={values}>{children}</PaymentContext.Provider>

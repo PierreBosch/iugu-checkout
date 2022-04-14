@@ -1,17 +1,19 @@
 import { FiChevronLeft } from 'react-icons/fi';
-
+import { useNavigate } from 'react-router-dom';
+import WhiteBookSvg from '../../assets/images/white-book.svg?component';
 import * as S from './styles';
 
-import WhiteBookSvg from '../../assets/images/white-book.svg?component';
-
 function Header() {
+  const navigate = useNavigate();
   return (
     <S.Container>
-      <div className="header__navigation">
-        <a href="!#" className="header__link">
-          <FiChevronLeft className="header__link-icon" size={24} />
-        </a>
-      </div>
+      <button
+        onClick={() => navigate(-1)}
+        className="header__link"
+        type="button"
+      >
+        <FiChevronLeft className="header__link-icon" size={24} />
+      </button>
 
       <div className="header__logo">
         <WhiteBookSvg />
