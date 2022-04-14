@@ -1,9 +1,10 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
 import { ButtonHTMLAttributes } from 'react';
 import * as S from './styles';
 
 interface ButtonPrimaryProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  withIcon: boolean;
+  withIcon?: boolean;
   classes: string | '';
 }
 

@@ -252,6 +252,7 @@ function Checkout() {
             disabled={paymentForm.isSubmitting || !paymentForm.isValid}
             type="submit"
             classes="full-width"
+            withIcon={false}
           >
             Finalizar pagamento
           </ButtonPrimary>
