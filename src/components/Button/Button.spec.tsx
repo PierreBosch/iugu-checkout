@@ -5,7 +5,9 @@ import CustomThemeProvider from '../../contexts/ThemeContext';
 test('it should be able render correctly', () => {
   const { getByRole } = render(
     <CustomThemeProvider>
-      <ButtonPrimary>Finalizar pagamento</ButtonPrimary>
+      <ButtonPrimary withIcon={false} classes="">
+        Finalizar pagamento
+      </ButtonPrimary>
     </CustomThemeProvider>,
   );
 
