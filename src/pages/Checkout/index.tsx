@@ -30,7 +30,7 @@ function Checkout() {
       creditCardExpirationDate: '',
       creditCardHolder: '',
       creditCardNumber: '',
-      installments: '1',
+      installments: '',
       offerId: '',
     },
     enableReinitialize: false,
@@ -48,6 +48,7 @@ function Checkout() {
       const [defaultOffer] = offersResponse;
 
       paymentForm.setFieldValue('offerId', defaultOffer.id);
+      paymentForm.setFieldValue('installments', defaultOffer.installments);
 
       setOffers(offersResponse);
       setSelectedOffer(defaultOffer);
@@ -237,10 +238,10 @@ function Checkout() {
               <option value="DEFAULT" disabled>
                 Selecione
               </option>
-              {[...Array(selectedOffer?.installments).keys()].map(
-                (item, numeroParcela) => (
-                  <option key={item}>{`${numeroParcela + 1}`}</option>
-                ),
+              {selectedOffer && (
+                <option value={selectedOffer.installments}>
+                  {selectedOffer.installments}
+                </option>
               )}
             </select>
             <label htmlFor="installments" className="input__label">
@@ -300,6 +301,7 @@ function Checkout() {
                 checked={offer.id.toString() === selectedOffer?.id.toString()}
                 onChange={e => {
                   paymentForm.handleChange(e.target.value);
+                  paymentForm.setFieldValue('installments', offer.installments);
                   setSelectedOffer(offer);
                 }}
                 data-testid={`offerId-${index}`}
